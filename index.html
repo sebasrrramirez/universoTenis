@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+    <!-- favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/Icon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/Icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/Icon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!-- CDN DE FONT-AWESOME -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+      integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Slice Tenis</title>
+  </head>
+  <body>
+    <header>
+      <img src="./Assets/logo.PNG" alt="Logo" class="logo" />
+      <nav class="navbar">
+        <div class="menu-label">
+          <img src="./assets/menu.png" alt="" class="menu-icon" />
+        </div>
+        <ul class="navbar-list">
+          <li><a class="navbar-link" href="#">Inicio</a></li>
+          <li><a class="navbar-link" href="#">Productos</a></li>
+          <li><a class="navbar-link" href="#">About Us</a></li>
+          <li><a class="navbar-link" href="#">Contacto</a></li>
+        </ul>
+        <div class="cart-label">
+          <i class="fa-solid fa-cart-shopping cart-icon">
+            <div class="cart-bubble">0</div>
+          </i>
+        </div>
+
+        <div class="cart">
+          <h2>Total de productos</h2>
+
+          <div class="cart-container"></div>
+
+          <span class="divider"></span>
+
+          <div class="cart-total">
+            <p>Total:</p>
+            <span class="total">$ 500</span>
+          </div>
+          <button class="btn-buy">Comprar</button>
+          <button class="btn-delete">Vaciar carrito</button>
+        </div>
+
+        <div class="overlay"></div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="hero-image">
+        <div>
+          <h1>UNIVERSO TENIS</h1>
+          <p>Tenemos lo último en equipos para tenis.</p>
+          <p>Encontra las mejores marcas, en un solo lugar</p>
+          <a href="#" class="ov-btn-grow-skew">Comprar ahora</a>
+        </div>
+      </article>
+
+      <section class="contenido">
+        <!-- Seccion Productos -->
+
+        <section id="products" class="products">
+          <h2>Nuestros productos</h2>
+          <!-- categories -->
+          <div class="categories">
+            <button class="category active">⇆ Todos</button>
+            <button class="category" data-category="raquetas">
+              🎾 Raquetas
+            </button>
+            <button class="category" data-category="bolsos">👜 Bolsos</button>
+            <button class="category" data-category="pelotas">🥎 Pelotas</button>
+            <button class="category" data-category="ropa">👕 Ropa</button>
+          </div>
+
+          <!-- products -->
+          <div class="products-container">
+            <!-- cartProduct -->
+            <div class="card">
+              <div class="card-img"></div>
+              <div class="card-info">
+                <p class="text-title">Product title</p>
+                <p class="text-body">Product description and details</p>
+              </div>
+              <div class="card-footer">
+                <span class="text-price">$499.49</span>
+                <div class="card-button">
+                  <svg class="svg-icon" viewBox="0 0 20 20">
+                    <path
+                      d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"
+                    ></path>
+                    <path
+                      d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"
+                    ></path>
+                    <path
+                      d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn-load">Ver Más</button>
+        </section>
+          <!-- Seccion About Us -->
+      <section class="acerca-de-nosotros">
+        <h2>Acerca de Nosotros</h2>
+        <p>
+          En <span>Slice Tenis</span>, somos apasionados del tenis y estamos
+          comprometidos con brindar a nuestros clientes productos y servicios
+          excepcionales para elevar su juego. </p>
+          <p>¡Únete a nosotros y
+          lleva tu juego al siguiente nivel!
+        </p>
+        <div class="ventajas">
+          <div class="ventaja">
+            <h3>Productos de Calidad</h3>
+            <p>
+              Colaboramos con las mejores marcas para proporcionar productos de
+              tenis excepcionales.
+            </p>
+          </div>
+          <div class="ventaja">
+            <h3>Asesoramiento Profesional</h3>
+            <p>
+              Nuestro equipo de expertos está aquí para ayudarte a encontrar el
+              equipo adecuado.
+            </p>
+          </div>
+          <div class="ventaja">
+            <h3>Compra Conveniente</h3>
+            <p>
+              Nuestra tienda en línea ofrece una experiencia de compra fácil y
+              segura.
+            </p>
+          </div>
+          <div class="ventaja">
+            <h3>Recibí el producto que esperás</h3>
+            <p>
+              Elegí la forma de entrega que prefieras ¡y listo! Aseguramos tu
+              entrega.
+            </p>
+          </div>
+        </div>
+              </p>
+      </section>
+      
+      <!-- form contacto -->
+      <section class="contact">
+        <div class="contact-form">
+          <span class="heading">Contactenos</span>
+          <form>
+            <label for="name">Nombre:</label>
+            <input type="text" required="" />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required="" />
+            <label for="message">Mensaje:</label>
+            <textarea id="message" name="message" required=""></textarea>
+            <button type="submit">Enviar</button>
+          </form>
+        </div>
+      </section>
+
+
+      </section>
+
+  
+    </main>
+
+    <footer>
+      <div class="footer">
+        <p>&copy; 2023 -💻 <a href="#">SebaP2P Dev</a></p>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
