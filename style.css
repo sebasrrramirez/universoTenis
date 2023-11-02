@@ -75,6 +75,13 @@ header {
   font-size: 15px;
 }
 
+.cart-menu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
 .cart-icon {
   font-size: 20px;
   font-weight: 600;
@@ -112,15 +119,16 @@ header {
 /*carrito*/
 .cart {
   position: absolute;
-  top: 65px;
+  top: 10vh;
   right: 0;
   padding: 50px 30px;
-  background: var(--Main);
-  border-left: 1px solid var(--nav-bg);
+  background-color: #333;
+  color: #fff;
+  border-left: 1px solid var(--Main);
   display: flex;
   flex-direction: column;
   gap: 30px;
-  height: calc(100vh - 65px);
+  height: calc(100vh - 10vh);
   overflow-y: scroll;
   z-index: 2;
   min-width: 375px;
@@ -263,7 +271,7 @@ main {
 }
 
 .hero-image {
-  background-image: url(./Assets/back1.jpg);
+  background-image: url(./back1.jpg);
   min-height: 100vh;
   width: 100vw;
   background-repeat: no-repeat;
@@ -415,7 +423,8 @@ main {
 /* cartProduct */
 .card {
   width: 190px;
-  height: 254px;
+  min-height: 400px;
+  height: auto;
   padding: 0.8em;
   border-radius: 0.8em;
   background: hsl(0, 0%, 94%);
@@ -425,11 +434,14 @@ main {
 }
 
 .card-img {
-  background-color: var(--Button);
-  height: 40%;
+  background-color: var(--Background);
+  height: 260px;
   width: 100%;
   border-radius: 0.5rem;
   transition: 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-info {
@@ -483,7 +495,7 @@ svg {
 
 /*Hover*/
 .card-img:hover {
-  transform: translateY(-10%);
+  transform: translateY(-2%);
   box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px,
     rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
 }
@@ -552,7 +564,7 @@ h3 {
 
 .contact-form {
   width: 220px;
-  height: 400px;
+  height: auto;
   padding: 0.8em;
   border-radius: 0.8em;
   background: #f5f5f5;
@@ -563,6 +575,8 @@ h3 {
 
 .contact-form label {
   color: var(--Headline);
+  align-self: start;
+  margin-bottom: 10px;
 }
 
 .contact-form .heading {
@@ -578,10 +592,6 @@ h3 {
   flex-direction: column;
 }
 
-.contact-form label {
-  margin-bottom: 10px;
-}
-
 textarea {
   resize: none;
   height: 80px;
@@ -594,6 +604,7 @@ textarea {
   border: none;
   border-radius: 5px;
   margin-bottom: 20px;
+  width: calc(100% - 25px);
 }
 
 .contact-form input:focus,
@@ -617,6 +628,39 @@ textarea {
 .contact-form button[type="submit"]:hover {
   transform: scale(1.05);
   transition: transform 0.3s ease-in-out;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+/* Error / ok */
+.form__field.error input {
+  border: 1px solid var(--Button);
+}
+
+.form__field small {
+  color: var(--Button);
+  max-width: 350px;
+  text-align: center;
+  margin-bottom: 10px;
+  display: none;
+}
+
+.form__field.success input {
+  border: 1px solid var(--Tertiary);
+}
+
+#form__error {
+  color: var(--Button);
+  font-size: 1rem;
+  margin: 8px 0px;
+  max-width: 350px;
+  text-align: center;
 }
 
 /*FOOTER*/

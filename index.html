@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
+    <link rel="stylesheet" href="animation.css">
     <!-- favicon -->
     <link
       rel="apple-touch-icon"
@@ -38,20 +39,23 @@
     <header>
       <img src="./Assets/logo.PNG" alt="Logo" class="logo" />
       <nav class="navbar">
-        <div class="menu-label">
-          <img src="./assets/menu.png" alt="" class="menu-icon" />
-        </div>
         <ul class="navbar-list">
           <li><a class="navbar-link" href="#">Inicio</a></li>
           <li><a class="navbar-link" href="#">Productos</a></li>
           <li><a class="navbar-link" href="#">About Us</a></li>
           <li><a class="navbar-link" href="#">Contacto</a></li>
         </ul>
-        <div class="cart-label">
+        <div class="cart-menu">
+          <div class="menu-label">
+          <img src="./assets/menu.png" alt="" class="menu-icon" />
+          </div>
+          <div class="cart-label">
           <i class="fa-solid fa-cart-shopping cart-icon">
             <div class="cart-bubble">0</div>
           </i>
+          </div>
         </div>
+
 
         <div class="cart">
           <h2>Total de productos</h2>
@@ -95,17 +99,16 @@
             </button>
             <button class="category" data-category="bolsos">👜 Bolsos</button>
             <button class="category" data-category="pelotas">🥎 Pelotas</button>
-            <button class="category" data-category="ropa">👕 Ropa</button>
           </div>
 
           <!-- products -->
           <div class="products-container">
             <!-- cartProduct -->
             <div class="card">
-              <div class="card-img"></div>
+              <div class="card-img"><img src="./Assets/ImgProd/raqueteroBabolatEvo.png" alt=""></div>
               <div class="card-info">
                 <p class="text-title">Product title</p>
-                <p class="text-body">Product description and details</p>
+                <p class="text-body">Product description and detail</p>
               </div>
               <div class="card-footer">
                 <span class="text-price">$499.49</span>
@@ -174,13 +177,22 @@
       <section class="contact">
         <div class="contact-form">
           <span class="heading">Contactenos</span>
-          <form>
-            <label for="name">Nombre:</label>
-            <input type="text" required="" />
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required="" />
-            <label for="message">Mensaje:</label>
-            <textarea id="message" name="message" required=""></textarea>
+          <form class="form__container" id="contact-form" novalidate>
+            <div class="form__field">
+              <label for="name">Nombre:</label>
+              <input type="text" id="name"/>
+              <small></small>
+            </div>
+            <div class="form__field">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email"/>
+              <small></small>
+            </div>
+            <div class="form__field">
+              <label for="message">Mensaje:</label>
+              <textarea id="message" name="message"></textarea>
+              <small></small>
+            </div>
             <button type="submit">Enviar</button>
           </form>
         </div>
@@ -198,6 +210,6 @@
       </div>
     </footer>
 
-    <script src="app.js"></script>
+    <script src="/Assets/app.js"></script>
   </body>
 </html>
