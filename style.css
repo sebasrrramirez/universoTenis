@@ -301,6 +301,15 @@ main {
   color: var(--Main);
 }
 
+/*CLASE PARA OCULTAR BOTONES*/
+.hidden {
+  display: none;
+}
+
+.active {
+  background: var(--Highlight);
+}
+
 /*** ESTILOS BOTÓN GROW SKEW ***/
 .ov-btn-grow-skew {
   background: #fff; /* color de fondo */
