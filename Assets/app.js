@@ -9,12 +9,26 @@ const cartMenu = document.querySelector(".cart"); //div del carrito
 const barsMenu = document.querySelector(".navbar-list"); //div del menu
 const overlay = document.querySelector(".overlay");
 const cartBubble = document.querySelector(".cart-bubble"); //bubble del carrito
+const total = document.querySelector(".total"); //total
+const buyBtn = document.querySelector(".btn-buy"); //boton comprar
+const deleteBtn = document.querySelector(".btn-delete"); //boton vaciar carrito
+const productsCart = document.querySelector(".cart-container"); //container del carrito
+// Modal del success
+const successModal = document.querySelector(".add-modal");
 //contenedor de productos y catergorias
 // Contenedor de productos
 const productsContainer = document.querySelector(".products-container");
 const showMoreBtn = document.querySelector(".btn-load");
 const categoriesContainer = document.querySelector(".categories");
 const categoriesList = document.querySelectorAll(".category");
+//
+
+//funciones LS//
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const saveCart = () => {
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
 
 /*******FUNCIONES GENERICAS********/
 // Funcion check input vacio
@@ -181,22 +195,12 @@ const createProductTemplate = (product) => {
               </div>
               <div class="card-footer">
                 <span class="text-price">U$S ${price}</span>
-                <div class="card-button" data-id='${id}' 
-                data-name='${title}'
-                data-bid='${price}' 
-                data-img='${cardImg}'>
-                  <svg class="svg-icon" viewBox="0 0 20 20">
-                    <path
-                      d="M17.72,5.011H8.026c-0.271,0-0.49,0.219-0.49,0.489c0,0.271,0.219,0.489,0.49,0.489h8.962l-1.979,4.773H6.763L4.935,5.343C4.926,5.316,4.897,5.309,4.884,5.286c-0.011-0.024,0-0.051-0.017-0.074C4.833,5.166,4.025,4.081,2.33,3.908C2.068,3.883,1.822,4.075,1.795,4.344C1.767,4.612,1.962,4.853,2.231,4.88c1.143,0.118,1.703,0.738,1.808,0.866l1.91,5.661c0.066,0.199,0.252,0.333,0.463,0.333h8.924c0.116,0,0.22-0.053,0.308-0.128c0.027-0.023,0.042-0.048,0.063-0.076c0.026-0.034,0.063-0.058,0.08-0.099l2.384-5.75c0.062-0.151,0.046-0.323-0.045-0.458C18.036,5.092,17.883,5.011,17.72,5.011z"
-                    ></path>
-                    <path
-                      d="M8.251,12.386c-1.023,0-1.856,0.834-1.856,1.856s0.833,1.853,1.856,1.853c1.021,0,1.853-0.83,1.853-1.853S9.273,12.386,8.251,12.386z M8.251,15.116c-0.484,0-0.877-0.393-0.877-0.874c0-0.484,0.394-0.878,0.877-0.878c0.482,0,0.875,0.394,0.875,0.878C9.126,14.724,8.733,15.116,8.251,15.116z"
-                    ></path>
-                    <path
-                      d="M13.972,12.386c-1.022,0-1.855,0.834-1.855,1.856s0.833,1.853,1.855,1.853s1.854-0.83,1.854-1.853S14.994,12.386,13.972,12.386z M13.972,15.116c-0.484,0-0.878-0.393-0.878-0.874c0-0.484,0.394-0.878,0.878-0.878c0.482,0,0.875,0.394,0.875,0.878C14.847,14.724,14.454,15.116,13.972,15.116z"
-                    ></path>
-                  </svg>
-
+                <div class="card-button">
+                  <button class="btn-add" data-id='${id}' 
+                  data-title='${title}'
+                  data-price='${price}' 
+                  data-img='${cardImg}'
+                  >Add</button>
                 </div>
               </div>
             </div>`;
@@ -209,9 +213,35 @@ const renderProducts = (productList) => {
     .join("");
 };
 
-//////////////////////FILTROS //////////////////////////////
+//////////////////////RENDERIZAR Y VER MAS //////////////////////////////
+// Funcion para saber si estamos al final del array
+const isLast = () => {
+  return appState.currentProductsIndex === appState.productsLimit - 1;
+};
+
+// Funcion ver mas
+const showMoreProducts = () => {
+  appState.currentProductsIndex += 1;
+  let { products, currentProductsIndex } = appState;
+  renderProducts(products[currentProductsIndex]);
+  if (isLast()) {
+    showMoreBtn.classList.add("hidden");
+  }
+};
+
+// Funcion ocultar boton ver mas
+const setShowMoreVisibility = () => {
+  if (!appState.activeFilter) {
+    showMoreBtn.classList.remove("hidden");
+    return;
+  }
+
+  showMoreBtn.classList.add("hidden");
+};
+
+//funciones de filtrado
 // Funcion para cambiar el estado de los botones de las categorias
-const changeBtnActiveState = (selectedCategory) => {
+const changeBtnActive = (selectedCategory) => {
   const categories = [...categoriesList];
 
   categories.forEach((categoryBtn) => {
@@ -224,6 +254,228 @@ const changeBtnActiveState = (selectedCategory) => {
   });
 };
 
+// Funcion para cambiar el estado del filtro activo
+const changeFiltersState = (btn) => {
+  appState.activeFilter = btn.dataset.category;
+  changeBtnActive(appState.activeFilter);
+  setShowMoreVisibility(appState.activeFilter);
+};
+
+// Funcion para filtrar los productos
+const renderFilteredProducts = () => {
+  const filteredProducts = productsData.filter(
+    (product) => product.category === appState.activeFilter
+  );
+  renderProducts(filteredProducts);
+};
+
+// Funcion para aplicar filtro
+const applyFilter = ({ target }) => {
+  appState.currentProductsIndex = 0;
+  if (!isInactiveFilterBtn(target)) return;
+  changeFiltersState(target);
+  productsContainer.innerHTML = "";
+  if (appState.activeFilter) {
+    //si hay filtro activo, renderizo
+    renderFilteredProducts();
+    appState.currentProductsIndex = 0;
+    return;
+  }
+  renderProducts(appState.products[0]);
+};
+
+// Funcion para saber si el elemento que apretamos es un boton de categoria y no esta activo
+const isInactiveFilterBtn = (element) => {
+  return (
+    element.classList.contains("category") &&
+    !element.classList.contains("active")
+  );
+};
+
+//funcion del carrito
+// template del carrito
+const createCartProductTemplate = (cartProduct) => {
+  const { id, price, img, title } = cartProduct;
+
+  return `
+  <div class="cart-item">
+            <img src="${img}" alt="${title}" />
+            <div class="item-info">
+              <h3 class="item-title">${title}</h3>
+              <p class="item-p">Precio</p>
+              <span class="item-price">$ ${price}</span>
+            </div>
+  </div>
+  `;
+};
+
+// Render
+const renderCart = () => {
+  if (!cart.length) {
+    productsCart.innerHTML = `<p class="empty-msg">No hay productos aun</p>`;
+    return;
+  }
+  productsCart.innerHTML = cart.map(createCartProductTemplate).join("");
+};
+
+//FUNCIONES DEL CARRITO
+// Funcion para obtener el total de la compra
+const getCartTotal = () => {
+  return cart.reduce((acc, cur) => acc + Number(cur.price) * cur.quantity, 0);
+};
+
+// Funcion para mostrar el total del carrito
+const showCartTotal = () => {
+  total.innerHTML = `U$S ${getCartTotal().toFixed(2)}`;
+};
+
+// Funcion para actualizar la burbuja con la cantidad de productos en el cart
+const renderCartBubble = () => {
+  cartBubble.textContent = cart.reduce((acc, cur) => acc + cur.quantity, 0);
+};
+
+// Funcion para habilitar o deshabilitar botones
+const disableBtn = (btn) => {
+  if (!cart.length) {
+    btn.classList.add("disabled");
+  } else {
+    btn.classList.remove("disabled");
+  }
+};
+
+// Funcion para actualizar el carro
+const updateCartState = () => {
+  saveCart();
+  renderCart();
+  showCartTotal();
+  disableBtn(buyBtn);
+  disableBtn(deleteBtn);
+  renderCartBubble();
+};
+
+const addProduct = (e) => {
+  if (!e.target.classList.contains("btn-add")) return;
+  const product = e.target.dataset;
+  // condicional para saber si ya hay mismo producto en el carro, tira error
+  if (isExistingCartProduct(product)) {
+    showSuccessModalError(
+      "Producto ya existente en el carrito. Solo puede adquirirse 1 unidad"
+    );
+  } else {
+    createCartProduct(product);
+    showSuccessModal("Producto añadido");
+  }
+  updateCartState();
+};
+
+// Funcion para agregar una unidad al producto
+// const addUnitToProduct = (product) => {
+//   cart = cart.map((cartProduct) =>
+//     cartProduct.id === product.id
+//       ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
+//       : cartProduct
+//   );
+// };
+
+// Funcion para saber si un producto ya existe en el carrito
+const isExistingCartProduct = (product) => {
+  return cart.find((item) => item.id === product.id);
+};
+
+// Funcion para crear un objeto con el dato del producto y agregando una unidad
+const createCartProduct = (product) => {
+  cart = [...cart, { ...product, quantity: 1 }];
+};
+
+// Funcion para mostrar el modal
+const showSuccessModal = (msg) => {
+  successModal.classList.add("active-modal");
+  successModal.textContent = msg;
+
+  setTimeout(() => {
+    successModal.classList.remove("active-modal");
+  }, 2000);
+};
+
+//funcion para mostrar el modal Error
+const showSuccessModalError = (msg) => {
+  successModal.classList.add("active-modal-error");
+  successModal.textContent = msg;
+
+  setTimeout(() => {
+    successModal.classList.remove("active-modal-error");
+  }, 2000);
+};
+
+// Funcion para manejar el evento click de + en el producto carrito
+// const handlePlusBtnEvent = (id) => {
+//   const existingCartProduct = cart.find((item) => item.id === id);
+//   addUnitToProduct(existingCartProduct);
+// };
+
+// Funcion para manejar el evento click del - en el producto carrito
+// const handleMinusBtnEvent = (id) => {
+//   const existingCartProduct = cart.find((item) => item.id === id);
+
+//   if (existingCartProduct.quantity === 1) {
+//     if (window.confirm("Deseas eliminar el producto?")) {
+//       removeProductFromCart(existingCartProduct);
+//     }
+//     return;
+//   }
+
+//   substractProductUnit(existingCartProduct);
+// };
+
+// const substractProductUnit = (existingCartProduct) => {
+//   cart = cart.map((product) => {
+//     return product.id === existingCartProduct.id
+//       ? { ...product, quantity: Number(product.quantity) - 1 }
+//       : product;
+//   });
+// };
+
+const removeProductFromCart = (existingCartProduct) => {
+  cart = cart.filter((product) => product.id !== existingCartProduct.id);
+  updateCartState();
+};
+
+// Funcion para manejar la cantidad de los productos en el carro
+// const handleQuantity = (e) => {
+//   if (e.target.classList.contains("up")) {
+//     handlePlusBtnEvent(e.target.dataset.id);
+//   } else if (e.target.classList.contains("down")) {
+//     handleMinusBtnEvent(e.target.dataset.id);
+//   }
+//   // para todos los casos
+//   updateCartState();
+// };
+
+const resetCartItems = () => {
+  cart = [];
+  updateCartState();
+};
+
+const completeCartAction = (confirmMsg, successMsg) => {
+  if (!cart.length) return;
+  if (window.confirm(confirmMsg)) {
+    resetCartItems();
+    alert(successMsg);
+  }
+};
+
+const completeBuy = () => {
+  completeCartAction("Deseas completar tu compra?", "Gracias por tu compra!");
+};
+
+const deleteCart = () => {
+  completeCartAction(
+    "Deseas vaciar el carrito?",
+    "No hay productos en el carro"
+  );
+};
+
+//init
 // Funcion init
 const init = () => {
   //funciones para el form de contacto
@@ -238,8 +490,18 @@ const init = () => {
   window.addEventListener("scroll", closeOnScroll);
   //funciones para mostrar productos
   renderProducts(appState.products[0]);
-  showMoreBtn.addEventListener("click", showMoreProducts);
   categoriesContainer.addEventListener("click", applyFilter);
+  showMoreBtn.addEventListener("click", showMoreProducts);
+  //funciones para agregar al carrito y renderizar
+  productsContainer.addEventListener("click", addProduct);
+  productsCart.addEventListener("click", updateCartState);
+  document.addEventListener("DOMContentLoaded", renderCart);
+  //funciones para el carrito
+  buyBtn.addEventListener("click", completeBuy);
+  deleteBtn.addEventListener("click", deleteCart);
+  disableBtn(buyBtn);
+  disableBtn(deleteBtn);
+  renderCartBubble(cart);
 };
 
 init();

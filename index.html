@@ -5,26 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
-    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="animation.css" />
     <!-- favicon -->
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="/img/Icon/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="/img/Icon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/img/Icon/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="shortcut icon" href="./Assets/favicon.png" />
     <!-- CDN DE FONT-AWESOME -->
     <link
       rel="stylesheet"
@@ -33,7 +16,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Slice Tenis</title>
+    <title>Universo Tenis</title>
   </head>
   <body>
     <header>
@@ -41,35 +24,36 @@
       <nav class="navbar">
         <ul class="navbar-list">
           <li><a class="navbar-link" href="#">Inicio</a></li>
-          <li><a class="navbar-link" href="#">Productos</a></li>
-          <li><a class="navbar-link" href="#">About Us</a></li>
-          <li><a class="navbar-link" href="#">Contacto</a></li>
+          <li><a class="navbar-link" href="#products">Productos</a></li>
+          <li><a class="navbar-link" href="#aboutUs">About Us</a></li>
+          <li><a class="navbar-link" href="#contact">Contacto</a></li>
         </ul>
         <div class="cart-menu">
           <div class="menu-label">
-          <img src="./assets/menu.png" alt="" class="menu-icon" />
+            <img src="./assets/menu.png" alt="" class="menu-icon" />
           </div>
           <div class="cart-label">
-          <i class="fa-solid fa-cart-shopping cart-icon">
-            <div class="cart-bubble">0</div>
-          </i>
+            <i class="fa-solid fa-cart-shopping cart-icon">
+              <div class="cart-bubble">0</div>
+            </i>
           </div>
         </div>
 
-
         <div class="cart">
-          <h2>Total de productos</h2>
+          <h2>Tu carrito</h2>
 
           <div class="cart-container"></div>
 
-          <span class="divider"></span>
+          <span class="cart-line"></span>
 
           <div class="cart-total">
             <p>Total:</p>
-            <span class="total">$ 500</span>
+            <span class="total">U$S </span>
           </div>
-          <button class="btn-buy">Comprar</button>
-          <button class="btn-delete">Vaciar carrito</button>
+          <div class="cart-buttons">
+            <button class="ov-btn-cart-skew btn-delete">Vaciar carrito</button>
+            <button class="ov-btn-cart-skew btn-buy">Comprar</button>
+          </div>
         </div>
 
         <div class="overlay"></div>
@@ -82,7 +66,7 @@
           <h1>UNIVERSO TENIS</h1>
           <p>Tenemos lo último en equipos para tenis.</p>
           <p>Encontra las mejores marcas, en un solo lugar</p>
-          <a href="#" class="ov-btn-grow-skew">Comprar ahora</a>
+          <a href="#products" class="ov-btn-grow-skew">Comprar ahora</a>
         </div>
       </article>
 
@@ -105,78 +89,73 @@
           <div class="products-container"></div>
           <button class="btn-load">Ver Más</button>
         </section>
-          <!-- Seccion About Us -->
-      <section class="acerca-de-nosotros">
-        <h2>Acerca de Nosotros</h2>
-        <p>
-          En <span>Slice Tenis</span>, somos apasionados del tenis y estamos
-          comprometidos con brindar a nuestros clientes productos y servicios
-          excepcionales para elevar su juego. </p>
-          <p>¡Únete a nosotros y
-          lleva tu juego al siguiente nivel!
-        </p>
-        <div class="ventajas">
-          <div class="ventaja">
-            <h3>Productos de Calidad</h3>
-            <p>
-              Colaboramos con las mejores marcas para proporcionar productos de
-              tenis excepcionales.
-            </p>
-          </div>
-          <div class="ventaja">
-            <h3>Asesoramiento Profesional</h3>
-            <p>
-              Nuestro equipo de expertos está aquí para ayudarte a encontrar el
-              equipo adecuado.
-            </p>
-          </div>
-          <div class="ventaja">
-            <h3>Compra Conveniente</h3>
-            <p>
-              Nuestra tienda en línea ofrece una experiencia de compra fácil y
-              segura.
-            </p>
-          </div>
-          <div class="ventaja">
-            <h3>Recibí el producto que esperás</h3>
-            <p>
-              Elegí la forma de entrega que prefieras ¡y listo! Aseguramos tu
-              entrega.
-            </p>
-          </div>
-        </div>
+
+        <!-- Seccion About Us -->
+        <section class="acerca-de-nosotros" id="aboutUs">
+          <h2>Acerca de Nosotros</h2>
+          <p>
+            En <span>Slice Tenis</span>, somos apasionados del tenis y estamos
+            comprometidos con brindar a nuestros clientes productos y servicios
+            excepcionales para elevar su juego.
+          </p>
+          <p>¡Únete a nosotros y lleva tu juego al siguiente nivel!</p>
+          <div class="ventajas">
+            <div class="ventaja">
+              <h3>Productos de Calidad</h3>
+              <p>
+                Colaboramos con las mejores marcas para proporcionar productos
+                de tenis excepcionales.
               </p>
-      </section>
-      
-      <!-- form contacto -->
-      <section class="contact">
-        <div class="contact-form">
-          <span class="heading">Contactenos</span>
-          <form class="form__container" id="contact-form" novalidate>
-            <div class="form__field">
-              <label for="name">Nombre:</label>
-              <input type="text" id="name"/>
-              <small></small>
             </div>
-            <div class="form__field">
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email"/>
-              <small></small>
+            <div class="ventaja">
+              <h3>Asesoramiento Profesional</h3>
+              <p>
+                Nuestro equipo de expertos está aquí para ayudarte a encontrar
+                el equipo adecuado.
+              </p>
             </div>
-            <div class="form__field">
-              <label for="message">Mensaje:</label>
-              <textarea id="message" name="message"></textarea>
-              <small></small>
+            <div class="ventaja">
+              <h3>Compra Conveniente</h3>
+              <p>
+                Nuestra tienda en línea ofrece una experiencia de compra fácil y
+                segura.
+              </p>
             </div>
-            <button type="submit">Enviar</button>
-          </form>
-        </div>
+            <div class="ventaja">
+              <h3>Recibí el producto que esperás</h3>
+              <p>
+                Elegí la forma de entrega que prefieras ¡y listo! Aseguramos tu
+                entrega.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- form contacto -->
+        <section class="contact" id="contact">
+          <div class="contact-form">
+            <span class="heading">Contactenos</span>
+            <form class="form__container" id="contact-form" novalidate>
+              <div class="form__field">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" />
+                <small></small>
+              </div>
+              <div class="form__field">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" />
+                <small></small>
+              </div>
+              <div class="form__field">
+                <label for="message">Mensaje:</label>
+                <textarea id="message" name="message"></textarea>
+                <small></small>
+              </div>
+              <button type="submit">Enviar</button>
+            </form>
+          </div>
+        </section>
       </section>
-
-
-      </section>
-
-  
     </main>
 
     <footer>
@@ -184,8 +163,8 @@
         <p>&copy; 2023 -💻 <a href="#">SebaP2P Dev</a></p>
       </div>
     </footer>
+    <div class="add-modal"></div>
     <script src="/Assets/data.js"></script>
     <script src="/Assets/app.js"></script>
-    
   </body>
 </html>
