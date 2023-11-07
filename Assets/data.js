@@ -37,7 +37,7 @@ const productsData = [
     description: "Aro: 98. Peso: 305gr. Patrón: 18x20. Grip: 4 3/8",
     price: 260,
     category: "raquetas",
-    cardImg: "./Assets/ImgProd/RaquetaWilsonBladee.png",
+    cardImg: "./Assets/ImgProd/RaquetaWilsonBlad.png",
   },
   {
     id: 6,
