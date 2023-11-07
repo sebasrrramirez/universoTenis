@@ -5,7 +5,7 @@ const productsData = [
     description: "Aro: 98. Peso: 305gr. Patrón: 16x19. Grip: 4 3/8",
     price: 220,
     category: "raquetas",
-    cardImg: "./Assets/ImgProd/RaquetaBabolatPureDrive.png",
+    cardImg: "./Assets/ImgProd/RaquetababolatPureDrivee.png",
   },
   {
     id: 2,
