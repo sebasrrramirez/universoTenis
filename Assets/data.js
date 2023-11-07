@@ -13,7 +13,7 @@ const productsData = [
     description: "Aro: 98. Peso: 315gr. Patrón: 16x19. Grip: 4 3/8",
     price: 300,
     category: "raquetas",
-    cardImg: "./Assets/ImgProd/RaquetaBabolatPureStrikee.png",
+    cardImg: "./Assets/ImgProd/RaquetababolatPureStrikee.png",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const productsData = [
     description: "Aro: 98. Peso: 305gr. Patrón: 18x20. Grip: 4 3/8",
     price: 260,
     category: "raquetas",
-    cardImg: "./Assets/ImgProd/RaquetaWilsonBlade.png",
+    cardImg: "./Assets/ImgProd/RaquetawilsonBlade.png",
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const productsData = [
     description: "Aro: 100. Peso: 300gr. Patrón: 16x19. Grip: 4 3/8",
     price: 250,
     category: "raquetas",
-    cardImg: "./Assets/ImgProd/RaquetaWilsonBurnn.png",
+    cardImg: "./Assets/ImgProd/RaquetawilsonBurnn.png",
   },
   {
     id: 7,
