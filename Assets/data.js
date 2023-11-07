@@ -11,7 +11,7 @@ const productsData = [
     id: 2,
     title: "Babolat Pure Strike",
     description: "Aro: 98. Peso: 315gr. Patrón: 16x19. Grip: 4 3/8",
-    price: 300,
+    price: 301,
     category: "raquetas",
     cardImg: "./Assets/ImgProd/RaquetaBabolatPureStrikee.png",
   },
