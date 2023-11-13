@@ -282,11 +282,13 @@ main {
 }
 
 .hero-image h1 {
-  font-size: 5vw; /* Ajusta el tamaño del texto principal */
+  font-size: calc(2em + 2vw);
+  padding: 1em;
+  margin: 1em;
 }
 
 .hero-image p {
-  font-size: 1.5vw; /* Ajusta el tamaño del texto secundario */
+  font-size: calc(0.7em + 0.7vw); /* Ajusta el tamaño del texto secundario */
   max-width: 600px; /* Ajusta el ancho máximo del párrafo */
   /* margin: 0 auto; */
   color: var(--Main);

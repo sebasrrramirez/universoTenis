@@ -337,9 +337,9 @@ const renderCartBubble = () => {
 // Funcion para habilitar o deshabilitar botones
 const disableBtn = (btn) => {
   if (!cart.length) {
-    btn.classList.add("disabled");
+    btn.classList.add("hidden");
   } else {
-    btn.classList.remove("disabled");
+    btn.classList.remove("hidden");
   }
 };
 
