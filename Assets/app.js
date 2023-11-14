@@ -12,6 +12,7 @@ const cartBubble = document.querySelector(".cart-bubble"); //bubble del carrito
 const total = document.querySelector(".total"); //total
 const buyBtn = document.querySelector(".btn-buy"); //boton comprar
 const deleteBtn = document.querySelector(".btn-delete"); //boton vaciar carrito
+const btnCart = document.querySelector(".cart-buttons");
 const productsCart = document.querySelector(".cart-container"); //container del carrito
 // Modal del success
 const successModal = document.querySelector(".add-modal");
@@ -200,7 +201,7 @@ const createProductTemplate = (product) => {
                   data-title='${title}'
                   data-price='${price}' 
                   data-img='${cardImg}'
-                  >Add</button>
+                  ></button>
                 </div>
               </div>
             </div>`;
@@ -334,12 +335,15 @@ const renderCartBubble = () => {
   cartBubble.textContent = cart.reduce((acc, cur) => acc + cur.quantity, 0);
 };
 
-// Funcion para habilitar o deshabilitar botones
+// Funcion para habilitar o deshabilitar botones en el carrito
 const disableBtn = (btn) => {
   if (!cart.length) {
-    btn.classList.add("hidden");
+    btnCart.classList.remove("cart-buttons");
+    btnCart.classList.add("hidden");
+    return;
   } else {
-    btn.classList.remove("hidden");
+    btnCart.classList.remove("hidden");
+    btnCart.classList.add("cart-buttons");
   }
 };
 
@@ -367,15 +371,6 @@ const addProduct = (e) => {
   }
   updateCartState();
 };
-
-// Funcion para agregar una unidad al producto
-// const addUnitToProduct = (product) => {
-//   cart = cart.map((cartProduct) =>
-//     cartProduct.id === product.id
-//       ? { ...cartProduct, quantity: cartProduct.quantity + 1 }
-//       : cartProduct
-//   );
-// };
 
 // Funcion para saber si un producto ya existe en el carrito
 const isExistingCartProduct = (product) => {
@@ -407,49 +402,10 @@ const showSuccessModalError = (msg) => {
   }, 2000);
 };
 
-// Funcion para manejar el evento click de + en el producto carrito
-// const handlePlusBtnEvent = (id) => {
-//   const existingCartProduct = cart.find((item) => item.id === id);
-//   addUnitToProduct(existingCartProduct);
-// };
-
-// Funcion para manejar el evento click del - en el producto carrito
-// const handleMinusBtnEvent = (id) => {
-//   const existingCartProduct = cart.find((item) => item.id === id);
-
-//   if (existingCartProduct.quantity === 1) {
-//     if (window.confirm("Deseas eliminar el producto?")) {
-//       removeProductFromCart(existingCartProduct);
-//     }
-//     return;
-//   }
-
-//   substractProductUnit(existingCartProduct);
-// };
-
-// const substractProductUnit = (existingCartProduct) => {
-//   cart = cart.map((product) => {
-//     return product.id === existingCartProduct.id
-//       ? { ...product, quantity: Number(product.quantity) - 1 }
-//       : product;
-//   });
-// };
-
 const removeProductFromCart = (existingCartProduct) => {
   cart = cart.filter((product) => product.id !== existingCartProduct.id);
   updateCartState();
 };
-
-// Funcion para manejar la cantidad de los productos en el carro
-// const handleQuantity = (e) => {
-//   if (e.target.classList.contains("up")) {
-//     handlePlusBtnEvent(e.target.dataset.id);
-//   } else if (e.target.classList.contains("down")) {
-//     handleMinusBtnEvent(e.target.dataset.id);
-//   }
-//   // para todos los casos
-//   updateCartState();
-// };
 
 const resetCartItems = () => {
   cart = [];
